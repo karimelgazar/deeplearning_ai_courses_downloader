@@ -6,6 +6,7 @@ Use the Course class for the main functionality.
 """
 
 import argparse
+import os
 import sys
 import time
 from pathlib import Path
@@ -101,6 +102,15 @@ Examples:
         help=(
             f"Browser to extract cookies from (default: chrome). Supported browsers: {', '.join(SUPPORTED_BROWSERS)}"
         ),
+    )
+
+    parser.add_argument(
+        "-q",
+        "--quality",
+        type=str,
+        choices=["360", "720", "1080"],
+        default="720",
+        help="Maximum video quality/resolution to download (default: 720).",
     )
 
     args = parser.parse_args()
@@ -200,6 +210,9 @@ def main():
     """Main entry point for the CLI script."""
 
     args = prepare_args()
+
+    # Export quality to environment so downloader.py can read it directly
+    os.environ["DLAI_VIDEO_QUALITY"] = args.quality
 
     # Initialize authentication using browser cookies
     try:

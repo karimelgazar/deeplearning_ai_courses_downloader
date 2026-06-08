@@ -1,5 +1,6 @@
 # downloader.py
 # Small helper to run yt-dlp per-file with isolated progress state.
+import os
 from pathlib import Path
 from typing import Dict, Optional, Sequence
 
@@ -111,6 +112,9 @@ class YTDLDownloader:
     def _build_opts(self) -> dict:
         """Build options for yt-dlp."""
         output_file_path = self.out_dir / f"{self.file_stem}.%(ext)s"
+        
+        # Read the target quality from the environment (default to 720 if not set)
+        target_quality = os.getenv("DLAI_VIDEO_QUALITY", "720")
 
         opts = {
             "outtmpl": str(output_file_path.resolve()),
@@ -126,6 +130,8 @@ class YTDLDownloader:
             "fragment_retries": 10,
             # allow yt-dlp to use its internal concurrent fragment downloader as fallback
             "concurrent_fragment_downloads": 4,
+            # Force yt-dlp to select the best video up to the specified height
+            "format": f"bestvideo[height<={target_quality}]+bestaudio/best[height<={target_quality}]/best"
         }
 
         if self.use_aria2:
