@@ -8,7 +8,7 @@ A Python CLI tool to download courses from DeepLearning.AI, including videos, ca
 
 ```bash
 # Clone the repository
-git clone https://github.com/karimelgazar/deeplearning_ai_courses_downloader
+git clone https://github.com/dennisdatasci/deeplearning_ai_courses_downloader
 cd deeplearning_ai_courses_downloader
 
 # Or install normally
@@ -81,6 +81,7 @@ dl-ai --enrolled all
 - `-o, --output-dir`: Directory where courses will be saved (default: `./courses`)
 - `-c, --concurrent`: Number of lessons to download concurrently (default: `1`)
 - `-b, --browser`: Browser to extract cookies from (default: `chrome`). Supported: `chrome`, `chromium`, `opera`, `opera_gx`, `brave`, `edge`, `vivaldi`, `firefox`, `librewolf`, `safari`
+- `-q, --quality: Maximum video quality/resolution to download (default: 720). Choices: 360, 720, 1080`
 
 ## Features
 
