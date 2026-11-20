@@ -1,25 +1,28 @@
-secrets.json
-secret.json
-.venv/
-courses/
-.DS_Store
-.ipynb_checkpoints/
+# Byte-compiled / cache
 __pycache__/
+*.py[cod]
+*$py.class
 .pytest_cache/
-.ruff_cache/
-.mypy_cache/
-.vscode/
-.idea/
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-ideas/
-
-# Python package build artifacts
 *.egg-info/
-.eggs/
-build/
 dist/
-*.egg
+build/
+.venv/
+venv/
+
+# Secrets & Cookies (NEVER COMMIT)
+*cookie*.txt
+*cookies*.txt
+dlai-cookies.txt
+.env
+
+# Downloaded Course Content & State
+courses/
+*.mp4
+*.mkv
+*.ts
+*.vtt
+*.part
+.dl_state.json
+
+# Local troubleshooting scripts
+retry_failed.py

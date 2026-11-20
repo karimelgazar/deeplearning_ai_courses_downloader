@@ -103,6 +103,36 @@ dl-ai --enrolled all
 
 **Note**: Make sure you are logged into DeepLearning.AI in your browser before running the downloader. The tool extracts authentication cookies from your browser automatically.
 
+
+## Authentication via Exported Cookie File (Recommended on Windows)
+
+Modern Chrome on Windows uses App-Bound Encryption, which can prevent `browser-cookie3` from decrypting cookies directly (`Unable to get key for cookie decryption`).
+
+You can export your `learn.deeplearning.ai` cookies in **Netscape/Mozilla format** (`cookies.txt`) using a browser extension and pass the file via CLI or environment variable:
+
+```bash
+# Via CLI option (takes precedence over environment variable and --browser)
+dl-ai machine-learning --cookies-file "C:\path\to\dlai-cookies.txt" -o "D:\DL-AI-Courses"
+
+# Or via environment variable (Windows CMD)
+set "DL_AI_COOKIES_FILE=C:\path\to\dlai-cookies.txt"
+dl-ai machine-learning
+
+Video Container Remuxing (FFmpeg) & Resume
+
+    Valid MP4/MKV Output (--video-container): DeepLearning.AI HLS streams deliver MPEG-TS segments. By default (--video-container mp4), dl-ai uses FFmpegVideoRemuxer to losslessly remux streams into a valid .mp4 container (compatible with VLC and other players). Install FFmpeg on Windows with winget install Gyan.FFmpeg, or use --video-container source to keep the original container without FFmpeg.
+
+    Automatic Resume & Retries: Completed lessons are tracked per course in .dl_state.json. If a download is interrupted or a lesson fails due to transient network errors, re-run the exact same command to skip verified lessons and retry only failed ones. Use --no-resume or --overwrite to force re-downloading.
+
+    CLI Exit Codes: Returns exit code 0 only when all lessons succeed, and 1 if any lesson fails.
+
+Running Tests
+Bash
+
+pip install -e ".[dev]"
+pytest -v
+
+
 ## License
 
 MIT License
